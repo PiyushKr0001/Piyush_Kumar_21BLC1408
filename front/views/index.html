@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://th-thumbnailer.cdn-si-edu.com/pRfvxLYMPrsDVdNX9gFIJr3qSMQ=/fit-in/1600x0/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/5e/20/5e20f146-9fe0-4937-9068-2ed746676d70/10-a-game-designer.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            text-align: center;
+            padding: 100px;
+            margin: 0;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        #codeInput {
+            font-size: 1.2em;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        button {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #errorMessage {
+            margin-top: 20px;
+            color: red;
+            font-size: 1.1em;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Game Code</h2>
+        <input type="text" id="codeInput" placeholder="Enter code here..." />
+        <br />
+        <button id="createGame">Create Game</button>
+        <button id="joinGame">Join Game</button>
+        <div id="errorMessage"></div>
+    </div>
+
+    <script>
+        $("#createGame").on("click", function () {
+            window.location.replace("/white?code=" + $("#codeInput").val());
+        });
+
+        $("#joinGame").on("click", function () {
+            window.location.replace("/black?code=" + $("#codeInput").val());
+        });
+
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("error") === "invalidCode") {
+            $("#errorMessage").text("Invalid invite code");
+        }
+    </script>
+</body>
+</html>
